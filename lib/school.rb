@@ -1,41 +1,45 @@
 require 'pry'
+
 class School
+
+    
+    attr_accessor :name, :roster
+    
 
     def initialize(name)
         @name = name
         @roster = {}
     end
 
-    def name
-        @name
+    def add_student(name, grade)
+           if !@roster[grade]
+            @roster[grade] = []
+           end
+           @roster[grade] << name
     end
 
-    attr_accessor :roster
-
-    def add_student(student_name, grade)
-        @student_name = student_name
-        @grade = grade
-        if !@roster[grade]
-            roster[grade] = []
-        end
-        @roster[@grade] << (student_name)
-        
+    def roster
+        @roster
     end
 
     def grade(grade)
-        @roster[grade]
+        self.roster[grade]
     end
 
     def sort
-        sorted_students = {}
+        hash = {}
         roster.each do |grade, student|
-        sorted_students[grade] = student.sort 
-        end
-        sorted_students
+            hash[grade] = student.sort
+        end            
+        hash
     end
+
 end
 
+shs = School.new("SHS")
+shs.add_student("X", 10)
+shs.add_student("Y", 10)
+shs.add_student("Z", 11)
+shs.add_student("B", 7)
+shs.add_student("A", 9)
 
-school = School.new("Bayside High School")
-
-#binding.pry
